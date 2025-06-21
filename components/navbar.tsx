@@ -1,8 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { span } from "framer-motion/client";
 import { MenuItem } from "./menu-items";
+import { GithubIcon, LinkedInIcon } from "./social-icons";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 
 const navItems = [
 	{name: "Projects", href: "#work"},
@@ -19,6 +21,9 @@ const socialLinks = {
 
 
 export default function Navbar() {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
 	return (
 		<motion.nav
 			initial={{ y: -100 }}
@@ -56,11 +61,42 @@ export default function Navbar() {
 								<a 
 								href={socialLinks.github}
 								className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group">
-								6
+								<GithubIcon className="h-5 w-5 text-content/80 group-hover:text-primary transition-colors"/>
+								</a>
+								<a 
+								href={socialLinks.github}
+								className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group">
+								<LinkedInIcon className="h-5 w-5 text-content/80 group-hover:text-primary transition-colors"/>
 								</a>
 						</div>
 					</div>
+					<button
+					onClick={()=> setIsMenuOpen(!isMenuOpen)}
+					className="md:hidden p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors">
+						{isMenuOpen ? (
+							<XMarkIcon className="h-6 w-6 text-content/80"/>
+						):(
+							<Bars3Icon className="h-6 w-6 text-content/80"/>
+						)}
+					</button>
 				</div>
+				{isMenuOpen && (
+					<motion.div
+					initial={{ opacity: 0, y: -10 }}
+					animate={{ opacity: 1, y: 0 }}
+					className="md:hidden mt-4 pb-4 space-y-4"
+					>
+						{
+							navItems.map((item) => (
+							<a key={item.name}
+							href={item.href}
+							onClick={()=>setIsMenuOpen(false)}
+							className="block px-4 py-2 text-content/80 hover:text-primary hover:bg-white/5 rounded-lg transition-colors">
+								{item.name}
+							</a>	
+						))}
+					</motion.div>
+				)}
 			</div>
 		</motion.nav>
 	);
