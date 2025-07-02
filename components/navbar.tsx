@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { span } from "framer-motion/client";
 import { MenuItem } from "./menu-items";
 import { GithubIcon, LinkedInIcon } from "./social-icons";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
