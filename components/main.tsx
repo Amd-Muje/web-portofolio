@@ -1,7 +1,6 @@
 "use client";
 import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { motion } from "framer-motion";
-import { span } from "framer-motion/client";
 import Image from "next/image";
 import React from "react";
 import { FaReact } from "react-icons/fa";
@@ -9,7 +8,6 @@ import {
 	SiCss3,
 	SiHtml5,
 	SiJavascript,
-	SiNextdotjs,
 	SiTailwindcss,
 	SiUnity,
 } from "react-icons/si";
