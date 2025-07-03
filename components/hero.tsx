@@ -1,15 +1,15 @@
 "use client";
 import React from "react";
-import { motion, useScroll, useTransform} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ParticleCanvas } from "@/hooks/particle";
 
 export default function Hero() {
-	const {scrollY} = useScroll();
-	const y = useTransform(scrollY, [0, 500], [0,100])
+	const { scrollY } = useScroll();
+	const y = useTransform(scrollY, [0, 500], [0, 100]);
 	return (
 		<section className="min-h-screen relative overflow-hidden bg-black">
-			<ParticleCanvas/>
+			<ParticleCanvas />
 			<div className="max-w-7xl mx-auto px-6 pt-32">
 				<div className="flex flex-col lg:flex-row items-center gap-16">
 					<motion.div
@@ -66,7 +66,7 @@ export default function Hero() {
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
 						className="lg:w-1/2 relative"
-						style={{y}}
+						style={{ y }}
 					>
 						<div className="relative w-full aspect-square group">
 							{/* Border */}
@@ -81,7 +81,7 @@ export default function Hero() {
 								className="absoulte inset-0 rounded-3xl
                                     bg-gradient-to-r from-primary/30
                                 via-secondary/30 to-tertiary/30
-                                 opacity-50"
+                                opacity-50"
 							/>
 							{/* Floating Animation */}
 							<motion.div

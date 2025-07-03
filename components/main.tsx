@@ -3,81 +3,92 @@ import { ArrowUpRightIcon } from "@heroicons/react/16/solid";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
-import { FaReact } from "react-icons/fa";
-import {
-	SiCss3,
-	SiHtml5,
-	SiJavascript,
-	SiTailwindcss,
-	SiUnity,
-} from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
+import { useRouter } from "next/navigation";
+import { portfolioList } from "@/data/portfolio";
 
-const portfolios = [
-	{
-		title: "Overcooked 3D Game Clone",
-		description:
-			"Sebuah game 3D multiplayer lokal yang terinspirasi dari Overcooked, dibangun menggunakan Unity dan C#.",
-		tech: [
-			{ name: "Unity", icon: SiUnity, color: "#000000" },
-			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
-		],
-		image: "/projects/images.png",
-	},
-	{
-		title: "Donation Website for Content Creators",
-		description:
-			"Website yang memungkinkan pengguna memberi donasi ke content creator melalui interface sederhana dan aman.",
-		tech: [
-			{ name: "React", icon: FaReact, color: "#61DAFB" },
-			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-		],
-		image: "/projects/images.png",
-	},
-	{
-		title: "2.5D Turn-Based Game",
-		description:
-			"Game strategi berbasis giliran dengan tampilan 2.5D dan karakter visual buatan sendiri.",
-		tech: [
-			{ name: "Unity", icon: SiUnity, color: "#000000" },
-			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
-		],
-		image: "/projects/images.png",
-	},
-	{
-		title: "E-Commerce UI with Fake Store API",
-		description:
-			"Website e-commerce sederhana dengan filter kategori dan tampilan produk dari Fake Store API.",
-		tech: [
-			{ name: "React", icon: FaReact, color: "#61DAFB" },
-			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-		],
-		image: "/projects/images.png",
-	},
-	{
-		title: "Connect 4 Game in React",
-		description:
-			"Game Connect 4 berbasis web dengan logika permainan menggunakan React dan tampilan interaktif.",
-		tech: [
-			{ name: "React", icon: FaReact, color: "#61DAFB" },
-			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-		],
-		image: "/projects/images.png",
-	},
-	{
-		title: "Collaborative Website Project",
-		description:
-			"Website hasil kerja sama tim menggunakan Git untuk kolaborasi dan manajemen kode sumber.",
-		tech: [
-			{ name: "HTML", icon: SiHtml5, color: "#E34F26" },
-			{ name: "CSS", icon: SiCss3, color: "#1572B6" },
-			{ name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-		],
-		image: "/projects/images.png",
-	},
-];
+
+// const portfolios = [
+// 	{
+// 		id: 1,
+// 		title: "Overcooked 3D Game Clone",
+// 		description:
+// 			"Sebuah game 3D multiplayer lokal yang terinspirasi dari Overcooked, dibangun menggunakan Unity dan C#.",
+// 		tech: [
+// 			{ name: "Unity", icon: SiUnity, color: "#000000" },
+// 			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#4287f5",
+// 	},
+// 	{
+// 		id: 2,
+// 		title: "Donation Website for Content Creators",
+// 		description:
+// 			"Website yang memungkinkan pengguna memberi donasi ke content creator melalui interface sederhana dan aman.",
+// 		tech: [
+// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
+// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#2f1575",
+// 	},
+// 	{
+// 		id: 3,
+// 		title: "2.5D Turn-Based Game",
+// 		description:
+// 			"Game strategi berbasis giliran dengan tampilan 2.5D dan karakter visual buatan sendiri.",
+// 		tech: [
+// 			{ name: "Unity", icon: SiUnity, color: "#000000" },
+// 			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#d125e8",
+// 	},
+// 	{
+// 		id: 4,
+// 		title: "E-Commerce UI with Fake Store API",
+// 		description:
+// 			"Website e-commerce sederhana dengan filter kategori dan tampilan produk dari Fake Store API.",
+// 		tech: [
+// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
+// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#2f1575",
+// 	},
+// 	{
+// 		id: 5,
+// 		title: "Connect 4 Game in React",
+// 		description:
+// 			"Game Connect 4 berbasis web dengan logika permainan menggunakan React dan tampilan interaktif.",
+// 		tech: [
+// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
+// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#2f1575",
+// 	},
+// 	{
+// 		id: 6,
+// 		title: "Collaborative Website Project",
+// 		description:
+// 			"Website hasil kerja sama tim menggunakan Git untuk kolaborasi dan manajemen kode sumber.",
+// 		tech: [
+// 			{ name: "HTML", icon: SiHtml5, color: "#E34F26" },
+// 			{ name: "CSS", icon: SiCss3, color: "#1572B6" },
+// 			{ name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+// 		],
+// 		image: "/projects/images.png",
+// 		color: "#2f1575",
+// 	},
+// ];
 
 export default function Main() {
+	const router = useRouter();
+	const handleClick = (id: number) => {
+		router.push(`/projects/${id}`);
+	};
+
 	return (
 		<section className="py-32 relative id='work'">
 			<div className="max-w-7xl mx-auto px-6">
@@ -95,13 +106,13 @@ export default function Main() {
 				</motion.div>
 				{/* Work Grid */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-					{portfolios.map((portfolio, i) => (
+					{portfolioList.map((portfolio, i) => (
 						<motion.div
 							key={i}
 							initial={{ opacity: 0, y: 50 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: i * 0.1 }}
-                            whileHover={{ y: -10, transition: {duration: 0.2} }}
+							whileHover={{ y: -10, transition: { duration: 0.2 } }}
 							className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
 						>
 							{/* tempat gambar */}
@@ -119,54 +130,53 @@ export default function Main() {
 									priority
 								/>
 							</motion.div>
-                            {/* tempat contentnya */}
-                            <motion.div
-                            className="p-6 h-[25px] bg-surface"
-                            transition={{duration: 0.3}}
-                            >
-                                <div className="flex justify-between items-start mb-4 group/title"
-                                >
-                                    <h3 className="text-2xl font-bold text-content">{portfolio.title}</h3>
-                                    <ArrowUpRightIcon className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300"/>
-                                </div>
-                                <p className="text-content/80 mb-4">{portfolio.description}</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {
-                                        portfolio.tech.map((tech, j)=>(
-                                            <span
-                                            key={j}
-                                            className="px-3 py-1 rounded-full bg-white/5 text-content/80
+							{/* tempat contentnya */}
+							<motion.div
+								className="p-6 h-[25px] bg-surface"
+								transition={{ duration: 0.3 }}
+							>
+								<div className="flex justify-between items-start mb-4 group/title">
+									<h3 className="text-2xl font-bold text-content">
+										{portfolio.title}
+									</h3>
+										<ArrowUpRightIcon onClick={() => handleClick(portfolio.id)} className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300" />
+								</div>
+								<p className="text-content/80 mb-4">{portfolio.description}</p>
+								<div className="flex flex-wrap gap-2">
+									{portfolio.tech.map((tech, j) => (
+										<span
+											key={j}
+											className="px-3 py-1 rounded-full bg-white/5 text-content/80
                                             text-sm border border-white/5 hover:bg-surface transition-colors flex items-center gap-1.5 group/tech"
-                                            >
-                                                <tech.icon
-                                                style={{ color: tech.color }}
-                                                className="w-4 h-4 transition-colors"
-                                                />
-                                                <span className="group-hover/tech:text-content transition-colors"> 
-                                                    {tech.name}
-                                                </span>
-                                            </span>
-                                        ))
-                                    }
-                                </div>
-                            </motion.div>
-						</motion.div>   
+										>
+											<tech.icon
+												style={{ color: tech.color }}
+												className="w-4 h-4 transition-colors"
+											/>
+											<span className="group-hover/tech:text-content transition-colors">
+												{tech.name}
+											</span>
+										</span>
+									))}
+								</div>
+							</motion.div>
+						</motion.div>
 					))}
 				</div>
-                {/* view more */}
-                <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{opacity: 1, y: 0 }}
-                transition={{delay: 0.4}}
-                className="flex justify-center mt-20 relative z-[5]"
-                >
-                    <button className="relative px-8 py-3 rounded-full bg-surface border border-white/10 hover:border-primary/10 transition-all group">
-                        <span className="text-content transition-colors relative z-[1]">
-                            View All Project
-                        </span>
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity"/>
-                    </button>
-                </motion.div>
+				{/* view more */}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.4 }}
+					className="flex justify-center mt-20 relative z-[5]"
+				>
+					<button className="relative px-8 py-3 rounded-full bg-surface border border-white/10 hover:border-primary/10 transition-all group">
+						<span className="text-content transition-colors relative z-[1]">
+							View All Project
+						</span>
+						<div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+					</button>
+				</motion.div>
 			</div>
 		</section>
 	);
