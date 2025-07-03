@@ -1,11 +1,11 @@
 import Silk from "@/components/Silk/Silk";
 import { portfolioList } from "@/data/portfolio";
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 
 import React from "react";
 
-const ProjectPage = ({ params }: { params: { id: string } }) => {
+export default function ProjectPage({ params }: { params: { id: string } }) {
 	const projectId = parseInt(params.id, 10);
 	const project = portfolioList.find((p) => p.id === projectId);
 	if (!project) {
@@ -33,14 +33,14 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
 						{/* Section 1 */}
 						<div className="col-span-3 row-span-3 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
 							<div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl shadow-xl border border-white/10">
-								<Image src={project.image} alt="" className="rounded-2xl" />
+								<img src={project.image} alt="" className="rounded-2xl" />
 							</div>
 						</div>
 
 						{/* Section 2 */}
 						<div className="col-span-3 row-span-3 col-start-1 row-start-4 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
 							<div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl shadow-xl border border-white/10">
-								<Image src={project.image} alt="" className="rounded-2xl" />
+								<img src={project.image} alt="" className="rounded-2xl" />
 							</div>
 						</div>
 
@@ -60,4 +60,3 @@ const ProjectPage = ({ params }: { params: { id: string } }) => {
 	);
 };
 
-export default ProjectPage;
