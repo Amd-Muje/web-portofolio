@@ -6,83 +6,6 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { portfolioList } from "@/data/portfolio";
 
-
-// const portfolios = [
-// 	{
-// 		id: 1,
-// 		title: "Overcooked 3D Game Clone",
-// 		description:
-// 			"Sebuah game 3D multiplayer lokal yang terinspirasi dari Overcooked, dibangun menggunakan Unity dan C#.",
-// 		tech: [
-// 			{ name: "Unity", icon: SiUnity, color: "#000000" },
-// 			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#4287f5",
-// 	},
-// 	{
-// 		id: 2,
-// 		title: "Donation Website for Content Creators",
-// 		description:
-// 			"Website yang memungkinkan pengguna memberi donasi ke content creator melalui interface sederhana dan aman.",
-// 		tech: [
-// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
-// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#2f1575",
-// 	},
-// 	{
-// 		id: 3,
-// 		title: "2.5D Turn-Based Game",
-// 		description:
-// 			"Game strategi berbasis giliran dengan tampilan 2.5D dan karakter visual buatan sendiri.",
-// 		tech: [
-// 			{ name: "Unity", icon: SiUnity, color: "#000000" },
-// 			{ name: "C#", icon: TbBrandCSharp, color: "#239120" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#d125e8",
-// 	},
-// 	{
-// 		id: 4,
-// 		title: "E-Commerce UI with Fake Store API",
-// 		description:
-// 			"Website e-commerce sederhana dengan filter kategori dan tampilan produk dari Fake Store API.",
-// 		tech: [
-// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
-// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#2f1575",
-// 	},
-// 	{
-// 		id: 5,
-// 		title: "Connect 4 Game in React",
-// 		description:
-// 			"Game Connect 4 berbasis web dengan logika permainan menggunakan React dan tampilan interaktif.",
-// 		tech: [
-// 			{ name: "React", icon: FaReact, color: "#61DAFB" },
-// 			{ name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#2f1575",
-// 	},
-// 	{
-// 		id: 6,
-// 		title: "Collaborative Website Project",
-// 		description:
-// 			"Website hasil kerja sama tim menggunakan Git untuk kolaborasi dan manajemen kode sumber.",
-// 		tech: [
-// 			{ name: "HTML", icon: SiHtml5, color: "#E34F26" },
-// 			{ name: "CSS", icon: SiCss3, color: "#1572B6" },
-// 			{ name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-// 		],
-// 		image: "/projects/images.png",
-// 		color: "#2f1575",
-// 	},
-// ];
-
 export default function Main() {
 	const router = useRouter();
 	const handleClick = (id: number) => {
@@ -90,7 +13,7 @@ export default function Main() {
 	};
 
 	return (
-		<section className="py-32 relative id='work'">
+		<section className="py-32 relative " id='work'>
 			<div className="max-w-7xl mx-auto px-6">
 				{/* Section Header */}
 				<motion.div
@@ -139,7 +62,7 @@ export default function Main() {
 									<h3 className="text-2xl font-bold text-content">
 										{portfolio.title}
 									</h3>
-										<ArrowUpRightIcon onClick={() => handleClick(portfolio.id)} className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300" />
+										<ArrowUpRightIcon key={i} onClick={() => handleClick(portfolio.id)} className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300" />
 								</div>
 								<p className="text-content/80 mb-4">{portfolio.description}</p>
 								<div className="flex flex-wrap gap-2">
