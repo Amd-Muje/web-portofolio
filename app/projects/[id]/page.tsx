@@ -1,7 +1,7 @@
 import Silk from "@/components/Silk/Silk";
 import { portfolioList } from "@/data/portfolio";
 import { notFound } from "next/navigation";
-import { parse } from "path";
+
 import React from "react";
 
 const ProjectPage = ({ params }: { params: { id: string } }) => {
