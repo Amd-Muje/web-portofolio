@@ -5,7 +5,13 @@ import { notFound } from "next/navigation";
 
 import React from "react";
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
+type Props = {
+	params: {
+		id: string;
+	};
+};
+
+export default function ProjectPage({ params }: Props) {
 	const projectId = parseInt(params.id, 10);
 	const project = portfolioList.find((p) => p.id === projectId);
 	if (!project) {
@@ -17,15 +23,14 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 			<Silk
 				speed={6}
 				scale={1.2}
-				color={"#595959"} 
+				color={"#595959"}
 				noiseIntensity={2.4}
 				rotation={Math.random() * 6.28}
 			>
 				<div
 					className="absolute inset-0 z-0"
 					style={{
-						background:
-							`linear-gradient(to bottom right, ${project.color1}99, ${project.color2}99)`,
+						background: `linear-gradient(to bottom right, ${project.color1}99, ${project.color2}99)`,
 					}}
 				/>
 				<div className="container mx-auto px-6 py-12 h-screen">
@@ -58,5 +63,4 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 			</Silk>
 		</main>
 	);
-};
-
+}
