@@ -6,13 +6,14 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 type Props = {
-	params: {
+	params: Promise<{
 		id: string;
-	};
+	}>;
 };
 
-export default function ProjectPage({ params }: Props) {
-	const projectId = parseInt(params.id, 10);
+export default async function ProjectPage({ params }: Props) {
+    const { id } = await params;
+	const projectId = parseInt(id, 10);
 	const project = portfolioList.find((p) => p.id === projectId);
 	if (!project) {
 		notFound();
