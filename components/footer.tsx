@@ -3,6 +3,13 @@ import { GithubIcon, LinkedInIcon } from "./social-icons";
 import { EnvelopeIcon } from "@heroicons/react/16/solid";
 
 export default function Footer() {
+
+	const socialLinks = {
+		github: "https://github.com/Amd-Muje",
+		linkedin: "https://www.linkedin.com/in/amdmujahid/",
+		email:"https://mail.google.com/mail/u/0/?fs=1&to=ahmadmujahid343@email.com&tf=cm"
+	}
+
 	return (
 		<footer className="bg-gray-900 border-t border-gray-800">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -67,9 +74,15 @@ export default function Footer() {
 					<div>
 						<h3 className="text-lg font-semibold text-white mb-4">Social</h3>
 						<ul className="space-x-4 flex">
+							<a href={socialLinks.github}>
 							<GithubIcon className="text-gray-400 h-6 w-6 hover:text-white transition-colors" />
+							</a>
+							<a href={socialLinks.linkedin}>
 							<LinkedInIcon className="text-gray-400 h-6 w-6 hover:text-white transition-colors" />
+							</a>
+							<a href={socialLinks.email}>
 							<EnvelopeIcon className="text-gray-400 h-6 w-6 hover:text-white transition-colors" />
+							</a>
 						</ul>
 					</div>
 					<div className="border-t border-gray-800 mt-12 pt-8 text-center">

@@ -13,9 +13,9 @@ const navItems = [
 ]
 
 const socialLinks = {
-	github: "",
-	linkedin: "",
-	instagram: "",
+	github: "https://github.com/Amd-Muje",
+	linkedin: "https://www.linkedin.com/in/amdmujahid/",
+	instagram: "https://www.instagram.com/amd.muje/",
 }
 
 
@@ -63,7 +63,7 @@ export default function Navbar() {
 								<GithubIcon className="h-5 w-5 text-content/80 group-hover:text-primary transition-colors"/>
 								</a>
 								<a 
-								href={socialLinks.github}
+								href={socialLinks.linkedin}
 								className="p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group">
 								<LinkedInIcon className="h-5 w-5 text-content/80 group-hover:text-primary transition-colors"/>
 								</a>
