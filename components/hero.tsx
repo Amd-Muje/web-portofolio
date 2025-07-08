@@ -4,7 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ParticleCanvas } from "@/hooks/particle";
 
-export default function Hero() {
+interface HomeSectionProps {
+	onScrollClick?: () => void;	
+}
+
+export default function Hero({onScrollClick}: HomeSectionProps) {
 	const { scrollY } = useScroll();
 	const y = useTransform(scrollY, [0, 500], [0, 100]);
 	return (
@@ -52,8 +56,10 @@ export default function Hero() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.8, delay: 1.2 }}
 							whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+							onClick={onScrollClick}
 							className="relative overflow-hidden px-8 py-4 rounded-full bg-surface border border-white/10 hover:border-primary/30 transition-all group"
 						>
+							
 							<span className="text-content group-hover:text-primary transition-colors">
 								Explore Work
 							</span>

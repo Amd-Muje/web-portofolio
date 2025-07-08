@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { portfolioList } from "@/data/portfolio";
+import { IoMdLink } from "react-icons/io";
 
 export default function Main() {
 	const router = useRouter();
@@ -13,7 +14,7 @@ export default function Main() {
 	};
 
 	return (
-		<section className="py-32 relative " id='work'>
+		<section className="py-32 relative " id="work">
 			<div className="max-w-7xl mx-auto px-6">
 				{/* Section Header */}
 				<motion.div
@@ -36,7 +37,7 @@ export default function Main() {
 							whileInView={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: i * 0.1 }}
 							whileHover={{ y: -10, transition: { duration: 0.2 } }}
-							className="group relative h-[500px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
+							className="group relative h-[550px] rounded-3xl overflow-hidden bg-surface border border-white/10 cursor-pointer"
 						>
 							{/* tempat gambar */}
 							<motion.div
@@ -62,7 +63,11 @@ export default function Main() {
 									<h3 className="text-2xl font-bold text-content">
 										{portfolio.title}
 									</h3>
-										<ArrowUpRightIcon key={i} onClick={() => handleClick(portfolio.id)} className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300" />
+									<ArrowUpRightIcon
+										key={i}
+										onClick={() => handleClick(portfolio.id)}
+										className="w-6 h-6 text-content/50 group-hover/title:text-primary transition-colors duration-300"
+									/>
 								</div>
 								<p className="text-content/80 mb-4">{portfolio.description}</p>
 								<div className="flex flex-wrap gap-2">
@@ -82,12 +87,19 @@ export default function Main() {
 										</span>
 									))}
 								</div>
+								<div className=" py-4 inline-flex">
+									<span className="flex items-center gap-2 border rounded-full bg-surface border-white/10 hover:border-primary/30 transition-all group px-5 py-2 text-content group-hover:text-primary">
+										{" "}
+										<IoMdLink className="w-6 h-6" />
+										<a href={portfolio.link}>Visit Project</a>
+									</span>
+								</div>
 							</motion.div>
 						</motion.div>
 					))}
 				</div>
 				{/* view more */}
-				<motion.div
+				{/* <motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.4 }}
@@ -99,7 +111,7 @@ export default function Main() {
 						</span>
 						<div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-tertiary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
 					</button>
-				</motion.div>
+				</motion.div> */}
 			</div>
 		</section>
 	);

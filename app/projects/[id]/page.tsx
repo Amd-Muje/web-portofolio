@@ -4,6 +4,7 @@ import { portfolioList } from "@/data/portfolio";
 import { notFound } from "next/navigation";
 
 import React from "react";
+import { IoMdLink } from "react-icons/io";
 
 type Props = {
 	params: Promise<{
@@ -12,7 +13,7 @@ type Props = {
 };
 
 export default async function ProjectPage({ params }: Props) {
-    const { id } = await params;
+	const { id } = await params;
 	const projectId = parseInt(id, 10);
 	const project = portfolioList.find((p) => p.id === projectId);
 	if (!project) {
@@ -40,24 +41,57 @@ export default async function ProjectPage({ params }: Props) {
 						{/* Section 1 */}
 						<div className="col-span-3 row-span-3 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
 							<div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl shadow-xl border border-white/10 overflow-hidden">
-								<img src={project.image} alt={project.title} className="w-full h-full object-cover rounded-2xl" />
+								<img
+									src={project.image}
+									alt={project.title}
+									className="w-full h-full object-cover rounded-2xl"
+								/>
 							</div>
 						</div>
 
 						{/* Section 2 */}
 						<div className="col-span-3 row-span-3 col-start-1 row-start-4 transition-all duration-300 hover:scale-[1.02]">
 							<div className="h-full w-full bg-white/5 backdrop-blur-md shadow-xl border border-white/10 overflow-hidden rounded-2xl">
-								<img src={project.image} alt={project.title} className="w-full h-full object-cover rounded-2xl" />
+								<img
+									src={project.image2}
+									alt={project.title}
+									className="w-full h-full object-cover rounded-2xl"
+								/>
 							</div>
 						</div>
 
 						{/* Section 3 */}
 						<div className="col-span-3 row-span-6 col-start-4 row-start-1 rounded-2xl transition-all duration-300 hover:scale-[1.02]">
-							<div className="h-full w-full bg-white/5 backdrop-blur-xl p-8 rounded-2xl shadow-xl border border-white/10 flex flex-col justify-start">
-								<h2 className="text-5xl font-bold text-white/90 mb-6">
-									{project.title}
-								</h2>
-								<p className="text-white/70 text-3xl leading-relaxed">Content for section 3</p>
+							<div className=" h-full w-full bg-white/5 backdrop-blur-xl p-8 rounded-2xl shadow-xl border border-white/10 flex flex-col justify-center ">
+								<div className="flex-none">
+									<h2 className="text-5xl font-bold text-white/90 mb-6">
+										{project.title}
+									</h2>
+								</div>
+								<div className="flex-auto">
+									{project.detail.map((text, index) => (
+										<ul key={index}>
+											<li  className="text-white/70 text-2xl leading-relaxed">- {text}</li>
+										</ul>
+									))}
+								</div>
+								<div className="pb-5 flex flex-row gap-5">
+									
+									{project.tech.map((tech, index) => (
+										<span key={index}>
+											<tech.icon className="w-10 h-10"/>
+										</span>
+									))}
+								</div>
+								<div className="flex flex-col items-center justify-end ">
+
+									<a href="">
+									<div className="flex flex-row items-center gap-4 bg-white/5 backdrop-blur-xl p-5 rounded-full">
+										<IoMdLink className="w-10 h-10" />{" "}
+										<span> Visit Project</span>
+									</div>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -67,7 +101,11 @@ export default async function ProjectPage({ params }: Props) {
 						{/* Hero Section */}
 						<div className="flex-2 w-full aspect-square sm:aspect-video transition-all duration-300 hover:scale-[1.02]">
 							<div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl shadow-xl border border-white/10 overflow-hidden">
-								<img src={project.image} alt={project.title} className="w-full h-full object-cover rounded-2xl" />
+								<img
+									src={project.image}
+									alt={project.title}
+									className="w-full h-full object-cover rounded-2xl"
+								/>
 							</div>
 						</div>
 

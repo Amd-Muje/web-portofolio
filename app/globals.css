@@ -35,3 +35,7 @@ body {
 .animate-gradient-pulse {
 	animation: gradient-pulse 3s ease-in-out infinite;
 }
+
+html {
+	scroll-behavior: smooth;
+}

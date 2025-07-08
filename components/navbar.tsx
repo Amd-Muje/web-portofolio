@@ -5,12 +5,7 @@ import { MenuItem } from "./menu-items";
 import { GithubIcon, LinkedInIcon } from "./social-icons";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
 
-const navItems = [
-	{name: "Projects", href: "#work"},
-	{name: "Skills", href: "#skills"},
-	{name: "Experience", href: "#experience"},
-	{name: "Contact", href: "#contact"},
-]
+
 
 const socialLinks = {
 	github: "https://github.com/Amd-Muje",
@@ -18,8 +13,26 @@ const socialLinks = {
 	instagram: "https://www.instagram.com/amd.muje/",
 }
 
+interface NavSectionProps {
+	onScrollToSkill?: () => void;
+	onScrollToContact?: () => void;
+	onScrollToMain?: () => void;
+}
 
-export default function Navbar() {
+
+
+export default function Navbar( {
+	onScrollToMain,
+	onScrollToSkill,
+	onScrollToContact,
+}: NavSectionProps) {
+	const navItems = [
+	{ name: 'Projects', onClick: onScrollToMain, href: '#work' },
+	{ name: 'Skills', onClick: onScrollToSkill, href: '#skills' },
+	{ name: 'Contact', onClick: onScrollToContact, href: '#contact' },
+	];
+
+
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
@@ -51,7 +64,9 @@ export default function Navbar() {
 						<div className="flex items-center gap-6 bg-background/80 px-4 py-2 rounded-full border border-white/5 shadow-lg shadow-primary/5">
 							{
 								navItems.map((items, i) => (
-									<MenuItem key={items.name} index={i} href={items.href}>{items.name}</MenuItem>
+									<button key={items.name} onClick={items.onClick}>
+									<MenuItem key={items.name}  index={i} href={items.href}>{items.name}</MenuItem>
+									</button>
 								))
 							}
 						</div>
