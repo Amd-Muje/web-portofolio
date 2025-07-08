@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: Props) {
 								</div>
 								<div className="flex flex-col items-center justify-end ">
 
-									<a href="">
+									<a href={project.link}>
 									<div className="flex flex-row items-center gap-4 bg-white/5 backdrop-blur-xl p-5 rounded-full">
 										<IoMdLink className="w-10 h-10" />{" "}
 										<span> Visit Project</span>
