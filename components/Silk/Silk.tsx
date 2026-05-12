@@ -2,8 +2,8 @@
 'use client'
 import React, { forwardRef, useMemo, useRef, useLayoutEffect } from "react";
 import { Canvas, useFrame, useThree, RootState } from "@react-three/fiber";
-import { Color, Mesh, ShaderMaterial } from "three";
-import { IUniform } from "three";
+import { Color, Mesh, ShaderMaterial } from "@/node_modules/@types/three";
+import { IUniform } from "@/node_modules/@types/three";
 
 type NormalizedRGB = [number, number, number];
 
@@ -160,15 +160,15 @@ const Silk: React.FC<SilkProps> = ({
   return (
     <div className="relative w-full h-full">
       {/* Canvas as background */}
-      <Canvas 
-        dpr={[1, 2]} 
+      <Canvas
+        dpr={[1, 2]}
         frameloop="always"
         className="absolute inset-0 w-full h-full"
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
       >
         <SilkPlane ref={meshRef} uniforms={uniforms} />
       </Canvas>
-      
+
       {/* Children rendered on top */}
       {children && (
         <div className="relative z-10 w-full h-full">
