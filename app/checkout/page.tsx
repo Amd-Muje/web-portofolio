@@ -62,6 +62,22 @@ function CheckoutContent() {
         Kembali
       </Link>
 
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold text-white">
+          Checkout <span className="bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent">
+            {type === "server" ? "Hosting Web" : type === "website" ? "Produk Web" : type === "domain" ? "Domain" : "Layanan"}
+          </span>
+        </h1>
+        <p className="text-content/80 text-lg mt-4 max-w-2xl">
+          Lengkapi informasi pesanan Anda di bawah ini untuk menyelesaikan pembelian <strong className="text-white">{name}</strong>.
+        </p>
+      </motion.div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Kolom Kiri: Detail Pembayaran */}
         <motion.div

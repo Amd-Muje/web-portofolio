@@ -138,9 +138,12 @@ export default function WebsitePage() {
                     <span className="text-primary/80 text-xs mt-1 font-medium">{product.priceNote}</span>
                   )}
                 </div>
-                <button className="w-full py-3 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors">
-                  Lihat Demo
-                </button>
+                <Link 
+                  href={`/checkout?type=website&name=${encodeURIComponent(product.title)}`}
+                  className="block text-center w-full py-3 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors"
+                >
+                  Pilih Produk
+                </Link>
               </div>
             </motion.div>
           ))}
