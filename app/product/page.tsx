@@ -42,14 +42,7 @@ export default function ProductPage() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+
 
   return (
     <div className="min-h-screen bg-background text-content selection:bg-primary/30">
@@ -67,7 +60,7 @@ export default function ProductPage() {
           </h1>
           <p className="text-content/80 text-lg max-w-2xl mx-auto">
             Choose the best solution to elevate your digital presence.
-            From powerful servers to custom websites and domains, we've got you covered.
+            From powerful servers to custom websites and domains, we&apos;ve got you covered.
           </p>
         </motion.div>
 

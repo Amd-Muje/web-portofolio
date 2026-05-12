@@ -11,7 +11,7 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user, account }) {
       if (account?.provider === "google") {
         try {
           await dbConnect();
@@ -39,7 +39,9 @@ const handler = NextAuth({
         // Fetch user from db to get user id and role
         const dbUser = await User.findOne({ email: session.user?.email });
         if (dbUser) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (session.user as any).id = dbUser._id.toString();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (session.user as any).role = dbUser.role;
         }
       } catch (error) {

@@ -58,14 +58,7 @@ export default function WebsitePage() {
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
+
 
   return (
     <div className="min-h-screen bg-background text-content selection:bg-primary/30">
