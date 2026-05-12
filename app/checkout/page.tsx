@@ -8,16 +8,40 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeftIcon, CreditCardIcon, QrCodeIcon, BuildingLibraryIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
 
+const PRODUCT_PRICES: Record<string, number> = {
+  "Basic VPS": 500000,
+  "Pro Server": 1968000,
+  "Enterprise Dedicated": 4500000,
+  "E-Commerce Website": 4207000,
+  "Website Kasir (POS)": 1800000,
+  "Website Absensi Karyawan": 2000000,
+};
+
+const DOMAIN_PRICES: Record<string, number> = {
+  ".com": 150000,
+  ".id": 230000,
+  ".net": 160000,
+  ".co.id": 300000,
+  ".org": 175000,
+};
+
 function CheckoutContent() {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
   const name = searchParams.get("name") || "Layanan / Produk";
-  const priceStr = searchParams.get("price") || "Rp 0";
   
-  // Ambil angka dari string price (misal: "Rp 150.000" -> 150000)
-  const numericPrice = parseInt(priceStr.replace(/[^0-9]/g, "")) || 0;
-  const tax = numericPrice * 0.11; // PPN 11%
-  const total = numericPrice + tax;
+  let numericPrice = 0;
+  if (type === "domain") {
+    const parts = name.split(".");
+    if (parts.length > 1) {
+      const tld = "." + parts.slice(1).join(".");
+      numericPrice = DOMAIN_PRICES[tld] || 0;
+    }
+  } else {
+    numericPrice = PRODUCT_PRICES[name] || 0;
+  }
+
+  const total = numericPrice;
 
   const formatRupiah = (num: number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -113,10 +137,7 @@ function CheckoutContent() {
                 </div>
                 <div className="font-medium text-white whitespace-nowrap">{formatRupiah(numericPrice)}</div>
               </div>
-              <div className="flex justify-between items-center text-content/70">
-                <span>PPN 11%</span>
-                <span>{formatRupiah(tax)}</span>
-              </div>
+
             </div>
 
             <div className="border-t border-white/10 pt-4 mb-8">

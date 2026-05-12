@@ -149,7 +149,7 @@ export default function ServerHostPage() {
                   )}
                 </div>
                 <Link 
-                  href={`/checkout?type=server&name=${encodeURIComponent(plan.title)}&price=${encodeURIComponent(plan.price)}`}
+                  href={`/checkout?type=server&name=${encodeURIComponent(plan.title)}`}
                   className={`block text-center w-full py-3 rounded-xl font-medium transition-colors ${
                   plan.highlight
                     ? "bg-primary hover:bg-primary/90 text-white"

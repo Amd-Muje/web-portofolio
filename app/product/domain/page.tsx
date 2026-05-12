@@ -172,7 +172,7 @@ export default function DomainPage() {
                             <div className="text-content/50 text-xs">/tahun</div>
                           </div>
                           <Link 
-                            href={`/checkout?type=domain&name=${result.domain}&price=${result.price}`}
+                            href={`/checkout?type=domain&name=${result.domain}`}
                             className="px-6 py-2 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors inline-block text-center"
                           >
                             Beli
