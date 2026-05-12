@@ -20,7 +20,8 @@ export default function WebsitePage() {
         "Integrasi Payment Gateway",
         "Laporan Penjualan"
       ],
-      price: "Rp 2.500.000"
+      price: "Rp 4.207.000",
+      priceNote: "sudah termasuk PPN"
     },
     {
       id: "kasir",
@@ -33,7 +34,8 @@ export default function WebsitePage() {
         "Multi-User (Admin & Kasir)",
         "Laporan Harian & Bulanan"
       ],
-      price: "Rp 1.800.000"
+      price: "Rp 1.800.000",
+      priceNote: ""
     },
     {
       id: "absensi",
@@ -46,7 +48,8 @@ export default function WebsitePage() {
         "Rekapitulasi Jam Kerja",
         "Export Laporan ke Excel"
       ],
-      price: "Rp 2.000.000"
+      price: "Rp 2.000.000",
+      priceNote: ""
     }
   ];
 
@@ -126,9 +129,14 @@ export default function WebsitePage() {
               </div>
 
               <div className="relative z-10 pt-6 border-t border-white/10 mt-auto">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-content/60 text-sm">Mulai dari</span>
-                  <span className="text-xl font-bold text-white">{product.price}</span>
+                <div className="flex flex-col mb-6">
+                  <span className="text-content/60 text-sm mb-1">Mulai dari</span>
+                  <div className="flex items-baseline">
+                    <span className="text-3xl font-bold text-white">{product.price}</span>
+                  </div>
+                  {product.priceNote && (
+                    <span className="text-primary/80 text-xs mt-1 font-medium">{product.priceNote}</span>
+                  )}
                 </div>
                 <button className="w-full py-3 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors">
                   Lihat Demo

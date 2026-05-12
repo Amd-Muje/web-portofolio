@@ -22,6 +22,7 @@ export default function ServerHostPage() {
         "Free SSL Certificate"
       ],
       price: "Rp 500.000",
+      priceNote: "",
       highlight: false
     },
     {
@@ -37,7 +38,8 @@ export default function ServerHostPage() {
         "DDoS Protection Basic",
         "Free Setup & Migration"
       ],
-      price: "Rp 1.900.000",
+      price: "Rp 1.968.000",
+      priceNote: "sudah termasuk PPN",
       highlight: true
     },
     {
@@ -54,6 +56,7 @@ export default function ServerHostPage() {
         "Priority 24/7 Support"
       ],
       price: "Rp 4.500.000",
+      priceNote: "",
       highlight: false
     }
   ];
@@ -141,6 +144,9 @@ export default function ServerHostPage() {
                     <span className="text-3xl font-bold text-white">{plan.price}</span>
                     <span className="text-content/50 ml-2">/bulan</span>
                   </div>
+                  {plan.priceNote && (
+                    <span className="text-primary/80 text-xs mt-1 font-medium">{plan.priceNote}</span>
+                  )}
                 </div>
                 <Link 
                   href={`/checkout?type=server&name=${encodeURIComponent(plan.title)}&price=${encodeURIComponent(plan.price)}`}

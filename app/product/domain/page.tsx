@@ -15,7 +15,7 @@ export default function DomainPage() {
 
   const tldPrices = [
     { tld: ".com", price: "Rp 150.000", available: true },
-    { tld: ".id", price: "Rp 250.000", available: true },
+    { tld: ".id", price: "Rp 230.000", available: true },
     { tld: ".net", price: "Rp 160.000", available: false }, // Simulasikan ada yang tidak tersedia
     { tld: ".co.id", price: "Rp 300.000", available: true },
     { tld: ".org", price: "Rp 175.000", available: true },
@@ -112,7 +112,7 @@ export default function DomainPage() {
               >
                 {[
                   { tld: ".com", price: "Rp 150.000" },
-                  { tld: ".id", price: "Rp 250.000" },
+                  { tld: ".id", price: "Rp 230.000" },
                   { tld: ".co.id", price: "Rp 300.000" },
                   { tld: ".net", price: "Rp 160.000" },
                 ].map((item, idx) => (
