@@ -68,8 +68,6 @@ export default function CartPage() {
         scale: 2,
         useCORS: true,
         backgroundColor: "#ffffff",
-        width: 620,
-        windowWidth: 620,
       });
 
       element.style.position = "absolute";
@@ -84,7 +82,9 @@ export default function CartPage() {
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      const imgWidth = pdfWidth - 20; // 10mm margin each side
+      
+      // Calculate image dimensions to fit the page width with a small 10mm margin
+      const imgWidth = pdfWidth - 20; 
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
       let heightLeft = imgHeight;
