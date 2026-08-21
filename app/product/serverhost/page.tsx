@@ -1,13 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeftIcon, ServerIcon, CheckCircleIcon, CpuChipIcon, ShieldCheckIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, ServerIcon, CheckCircleIcon, CpuChipIcon, ShieldCheckIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useCart } from "@/hooks/useCart";
+import CartToast from "@/components/CartToast";
+import { PRODUCT_PRICES } from "@/lib/cartStore";
 
 export default function ServerHostPage() {
+  const { addToCart } = useCart();
+  const [toast, setToast] = useState({ visible: false, message: "" });
+
+  const handleAddToCart = useCallback((plan: { id: string; title: string }) => {
+    addToCart({
+      id: `server-${plan.id}`,
+      name: plan.title,
+      type: "server",
+      category: "Host Server",
+      price: PRODUCT_PRICES[plan.title] || 0,
+    });
+    setToast({ visible: true, message: plan.title });
+  }, [addToCart]);
+
   const serverPlans = [
     {
       id: "basic",
@@ -148,21 +165,36 @@ export default function ServerHostPage() {
                     <span className="text-primary/80 text-xs mt-1 font-medium">{plan.priceNote}</span>
                   )}
                 </div>
-                <Link 
-                  href={`/checkout?type=server&name=${encodeURIComponent(plan.title)}`}
-                  className={`block text-center w-full py-3 rounded-xl font-medium transition-colors ${
-                  plan.highlight
-                    ? "bg-primary hover:bg-primary/90 text-white"
-                    : "bg-white/10 hover:bg-primary text-white"
-                }`}>
-                  Pilih Paket
-                </Link>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleAddToCart(plan)}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl font-medium border border-primary/50 text-primary hover:bg-primary/10 transition-colors text-sm"
+                  >
+                    <ShoppingCartIcon className="w-4 h-4" />
+                    Keranjang
+                  </button>
+                  <Link
+                    href={`/checkout?type=server&name=${encodeURIComponent(plan.title)}`}
+                    className={`flex-1 block text-center py-3 rounded-xl font-medium transition-colors ${
+                      plan.highlight
+                        ? "bg-primary hover:bg-primary/90 text-white"
+                        : "bg-white/10 hover:bg-primary text-white"
+                    }`}
+                  >
+                    Beli Sekarang
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </main>
       
+      <CartToast
+        message={toast.message}
+        visible={toast.visible}
+        onClose={() => setToast({ visible: false, message: "" })}
+      />
       <Footer />
     </div>
   );

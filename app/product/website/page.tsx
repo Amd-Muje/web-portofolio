@@ -1,13 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeftIcon, ShoppingCartIcon, BanknotesIcon, ClockIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useCart } from "@/hooks/useCart";
+import CartToast from "@/components/CartToast";
+import { PRODUCT_PRICES } from "@/lib/cartStore";
 
 export default function WebsitePage() {
+  const { addToCart } = useCart();
+  const [toast, setToast] = useState({ visible: false, message: "" });
+
+  const handleAddToCart = useCallback((product: { id: string; title: string }) => {
+    addToCart({
+      id: `website-${product.id}`,
+      name: product.title,
+      type: "website",
+      category: "Produk Website",
+      price: PRODUCT_PRICES[product.title] || 0,
+    });
+    setToast({ visible: true, message: product.title });
+  }, [addToCart]);
+
   const readyMadeProducts = [
     {
       id: "ecommerce",
@@ -138,18 +155,32 @@ export default function WebsitePage() {
                     <span className="text-primary/80 text-xs mt-1 font-medium">{product.priceNote}</span>
                   )}
                 </div>
-                <Link 
-                  href={`/checkout?type=website&name=${encodeURIComponent(product.title)}`}
-                  className="block text-center w-full py-3 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors"
-                >
-                  Pilih Produk
-                </Link>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-xl font-medium border border-primary/50 text-primary hover:bg-primary/10 transition-colors text-sm"
+                  >
+                    <ShoppingCartIcon className="w-4 h-4" />
+                    Keranjang
+                  </button>
+                  <Link
+                    href={`/checkout?type=website&name=${encodeURIComponent(product.title)}`}
+                    className="flex-1 block text-center py-3 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors"
+                  >
+                    Beli Sekarang
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
       </main>
 
+      <CartToast
+        message={toast.message}
+        visible={toast.visible}
+        onClose={() => setToast({ visible: false, message: "" })}
+      />
       <Footer />
     </div>
   );

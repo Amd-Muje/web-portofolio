@@ -1,17 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeftIcon, GlobeAltIcon, MagnifyingGlassIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, GlobeAltIcon, MagnifyingGlassIcon, CheckCircleIcon, XCircleIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { useCart } from "@/hooks/useCart";
+import CartToast from "@/components/CartToast";
+import { DOMAIN_PRICES } from "@/lib/cartStore";
 
 export default function DomainPage() {
+  const { addToCart } = useCart();
+  const [toast, setToast] = useState({ visible: false, message: "" });
   const [search, setSearch] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<{ domain: string; tld: string; available: boolean; price: string }[]>([]);
+
+  const handleAddDomainToCart = useCallback((domain: string, tld: string) => {
+    addToCart({
+      id: `domain-${domain}`,
+      name: domain,
+      type: "domain",
+      category: "Registrasi Domain",
+      price: DOMAIN_PRICES[tld] || 0,
+    });
+    setToast({ visible: true, message: domain });
+  }, [addToCart]);
 
   const tldPrices = [
     { tld: ".com", price: "Rp 150.000", available: true },
@@ -166,17 +182,26 @@ export default function DomainPage() {
                       </div>
 
                       {result.available ? (
-                        <div className="flex items-center gap-6 w-full sm:w-auto justify-between sm:justify-end">
+                        <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end flex-wrap">
                           <div className="text-right">
                             <div className="text-2xl font-bold text-primary">{result.price}</div>
                             <div className="text-content/50 text-xs">/tahun</div>
                           </div>
-                          <Link 
-                            href={`/checkout?type=domain&name=${result.domain}`}
-                            className="px-6 py-2 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors inline-block text-center"
-                          >
-                            Beli
-                          </Link>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleAddDomainToCart(result.domain, result.tld)}
+                              className="flex items-center gap-1.5 px-4 py-2 border border-primary/50 text-primary hover:bg-primary/10 rounded-xl font-medium transition-colors text-sm"
+                            >
+                              <ShoppingCartIcon className="w-4 h-4" />
+                              Keranjang
+                            </button>
+                            <Link 
+                              href={`/checkout?type=domain&name=${result.domain}`}
+                              className="px-5 py-2 bg-white/10 hover:bg-primary text-white rounded-xl font-medium transition-colors inline-block text-center"
+                            >
+                              Beli
+                            </Link>
+                          </div>
                         </div>
                       ) : (
                         <button disabled className="px-6 py-2 bg-white/5 text-content/40 rounded-xl font-medium cursor-not-allowed">
@@ -193,6 +218,11 @@ export default function DomainPage() {
         </div>
       </main>
       
+      <CartToast
+        message={toast.message}
+        visible={toast.visible}
+        onClose={() => setToast({ visible: false, message: "" })}
+      />
       <Footer />
     </div>
   );

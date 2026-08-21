@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { MenuItem } from "./menu-items";
 import { GithubIcon, LinkedInIcon } from "./social-icons";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/16/solid";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useCartCount } from "@/hooks/useCart";
 
 
 
@@ -30,10 +33,12 @@ export default function Navbar({
 		{ name: 'Projects', onClick: onScrollToMain, href: '#work' },
 		{ name: 'Skills', onClick: onScrollToSkill, href: '#skills' },
 		{ name: 'Contact', onClick: onScrollToContact, href: '#contact' },
+		{ name: 'Product', onClick: undefined, href: '/product' },
 	];
 
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const cartCount = useCartCount();
 
 
 	return (
@@ -70,6 +75,24 @@ export default function Navbar({
 								))
 							}
 						</div>
+						<div className="h-6 w-px bg-white/10 mx-2" />
+						{/* Cart Icon */}
+						<Link
+							href="/cart"
+							className="relative p-2 rounded-lg bg-white/5 hover:bg-primary/10 transition-colors group"
+						>
+							<ShoppingCartIcon className="h-5 w-5 text-content/80 group-hover:text-primary transition-colors" />
+							{cartCount > 0 && (
+								<motion.span
+									key={cartCount}
+									initial={{ scale: 0 }}
+									animate={{ scale: 1 }}
+									className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] bg-primary text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1"
+								>
+									{cartCount > 99 ? "99+" : cartCount}
+								</motion.span>
+							)}
+						</Link>
 						<div className="h-6 w-px bg-white/10 mx-2" />
 						<div className="flex gap-4">
 							<a
